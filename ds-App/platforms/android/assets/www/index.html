@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="js/cordova.js"></script>
+<script type="text/javascript" src="js/geolocation.js"></script>
+<script type="text/javascript" src="./js/aerogear.js"></script>
+<script type="text/javascript" src="./js/config.js"></script>
+<script type="text/javascript" src="./js/listUtil.js"></script>
+<script type="text/javascript" src="./js/weatherstation.js"></script>
+<script type="text/javascript" src="./js/googleCharts.js"></script>
+<script type="text/javascript" src="./js/init.js"></script>
+<script type="text/javascript" src="./js/raspberry.js"></script>
+<script type="text/javascript" src="./js/raspConfig.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNia_aWGQHPV2IYFV97XBORzR1rEAMkfc&sensor=false"></script>
+
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/starter-template.css" rel="stylesheet">
+<style type="text/css">
+.hide {
+	display: none;
+}
+
+p.link {
+	cursor: pointer;
+	padding: 3px 20px;
+}
+
+div.content {
+	margin-top: 50px;
+}
+#map-canvas {
+	width:100%;
+ 	height:500px;
+}
+.vert-divider{
+	padding: 15px;
+    margin-bottom: 20px;
+}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$("*[class^='data_']").bind('click', function() {
+			$("*[id^='data_']").addClass('hide');
+			id = $(this).attr('href').substr(1);
+			$('#' + id).removeClass('hide');
+			google.maps.event.trigger(map, 'resize');
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="data_home navbar-brand" href="#data_home">doubleSlash
+					M2M</a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown">Available Devices <b class="caret"></b></a>
+						<ul id="listview" class="dropdown-menu">
+							<li><a class="data_weather" href="#data_weather">Weatherstation  <span class="label" id="weather_status"></span></a></li>
+							<li><a class="data_rasp" href="#data_rasp">Raspberry  <span class="label" id="rasp_status"></span></a></li>
+						</ul></li>
+					<li><button class="btn btn-default" style="margin-top: 9px;"
+							name="refresh" title="Refresh dataItems" type="button">
+							<span class="glyphicon glyphicon-refresh"></span> Refresh Devices
+						</button></li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+	<div class="container content">
+		<div class="jumbotron col-md-12" id="data_home">
+			<h1>Sample Application for M2M Communication</h1>
+			<p class="lead"></p>
+		</div>
+		<div class="row hide" id="data_weather">
+		    
+			<div class="col-md-4">
+				<h1>Arduino Weatherstation</h1>
+				<div class="btn-toolbar" role="toolbar">
+				  <p id="xdays"> Show data of the Last X Days: </p>
+				  <div class="btn-group" id="plotDays">
+				  	  <button type="button" class="btn btn-default">1</button>
+					  <button type="button" class="btn btn-default">2</button>
+					  <button type="button" class="btn btn-default">3</button>
+					  <button type="button" class="btn btn-default">4</button>
+					  <button type="button" class="btn btn-default">5</button>
+					  <button type="button" class="btn btn-default">6</button>
+					  <button type="button" class="btn btn-default">7</button>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<div id="plotArea1" class="hide">
+					<div data-role="fieldcontain"></div>
+					<div id="temp"></div>
+					<div id="hum"></div>
+					<div id="pres"></div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row hide" id="data_rasp">
+			<div class="col-md-12">
+				<div class="btn-group-vertical">
+					<div class="alert hide" id="register_status"></div>
+					<input type="button" class="btn btn-default vert-divider" value="Register on Axeda" id="register">
+					<div class="alert hide" id="open_status"></div>
+					<input type="button" class="btn btn-default vert-divider" value="toggle LED manually" id="open">
+					<input type="button" class="btn btn-default vert-divider" value="Bluetooth Plugin get Bt Adress" id="echo">
+				</div>
+		    </div>
+			
+			
+		</div>
+	</div>
+</body>
+
+</html>

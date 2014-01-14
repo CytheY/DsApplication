@@ -1,0 +1,30 @@
+.plot {
+	text-align: left;
+	width: 450px;
+	height: 210px;
+	position: relative;
+	padding-right: 100px;
+}
+
+.ui-bar-b {
+	border: 1px solid #456f9a;
+	background: #6aaedb;
+	color: #fff;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #254f7a;
+	background: #009ed7; /* Old browsers */
+}
+
+/*Starts with all elements stacked*/
+.resp .ui-block-a,.resp .ui-block-b {
+	width: 100%;
+	float: none;
+}
+
+/* 1st breakpoint - Float A and B */
+@media all and (min-width: 34em) {
+	.resp .ui-block-a,.resp .ui-block-b {
+		float: left;
+		width: 49.95%;
+	}
+}
