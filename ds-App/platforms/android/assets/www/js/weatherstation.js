@@ -77,17 +77,6 @@ var weatherstation = {
 
 		console.log("REST URL: " + this.getURL() + this.getEndpoint());
 	},
-	addPipeWsCheck : function() {
-		pipeline.add({
-			name : "weatherCheck",
-			settings : {
-				baseURL : this.getURL(),
-				endpoint : "js_checkAssetOnline?modelName=WeatherStation" + this.addUserCredentials();
-			}
-		});
-		console.log("REST URL: " + "js_checkAssetOnline?modelName=WeatherStation" + this.addUserCredentials());
-	},
-
 	getPipe : function(pipeName) {
 		return pipeline.pipes[pipeName];
 	},
@@ -101,7 +90,7 @@ var weatherstation = {
 	},
 
 	addUserCredentials : function() {
-		return "&username=jschneider&password=Breisgauer";
+		return "&username=jschneider&password=Breisgauer1";
 	},
 	getPlot : function(serial){
 		document.getElementById("plotArea1").style.display="none";
@@ -119,19 +108,6 @@ var weatherstation = {
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				alert("There is no device with the serial '" + config.axedaSerial + "'!");
-			}
-		});
-	},
-	checkWsOnline : function(){
-		this.initPipe();
-		this.addPipeWsCheck();
-		var myPipe = this.getPipe("weatherCheck");
-		myPipe.read({
-			jsonp : {
-				customCallback : "weatherCheckCallback" 
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				alert("Request failed");
 			}
 		});
 	},

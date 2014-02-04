@@ -79,26 +79,6 @@ var raspberry = {
 			});
 			console.log("REST URL: " + this.getURL() + this.getEndpointOpen());
 		},
-		addPipeMorse : function(){
-			pipeline.add({
-				name : "raspMorse",
-				settings : {
-					baseURL : this.getURL(),
-					endpoint : this.getEndpointOpen() + this.addUserCredentials()
-				}
-			});
-			console.log("REST URL: " + this.getURL() + this.getEndpointOpen());
-		},
-		addPipeCheck : function(){
-			pipeline.add({
-				name : "raspCheck",
-				settings : {
-					baseURL : this.getURL(),
-					endpoint : "js_checkAssetOnline?modelName=RaspGate" + this.addUserCredentials();
-				}
-			});
-			console.log("REST URL: " + this.getURL() + this.getEndpointOpen());
-		},
 		getPipe : function(pipeName) {
 			return pipeline.pipes[pipeName];
 		},
@@ -117,7 +97,7 @@ var raspberry = {
 			return raspRegisterConfig.axedaFunctionMorse + "?morse=" + morse.toString();
 		},
 		addUserCredentials : function() {
-			return "&username=jschneider&password=Breisgauer";
+			return "&username=jschneider&password=Breisgauer1";
 		},
 
 		initDataManager : function() {
@@ -161,22 +141,5 @@ var raspberry = {
 					alert("Register Failed!");
 				}
 			});
-		},
-		checkAgent : function(){
-			this.initPipe();
-			this.addPipeCheck();
-			var myPipe = this.getPipe("raspCheck");
-			myPipe.read({
-				jsonp : {
-					customCallback : "raspCheckCallback" 
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("Request failed");
-				}
-			});
-		},
-
-		reset : function() {
-
 		}
 };
